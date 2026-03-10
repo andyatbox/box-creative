@@ -35,6 +35,17 @@ export default async function ProjectPage({ params }) {
   : null
  const otherProjects = allProjects.filter(p => p._id !== project._id)
 
+ // Group other projects by category, current category first
+ const CATEGORY_ORDER = [
+  project.category,
+  ...Object.keys(CATEGORY_LABELS).filter(c => c !== project.category),
+ ]
+ const groupedProjects = CATEGORY_ORDER.reduce((acc, cat) => {
+  const projects = otherProjects.filter(p => p.category === cat)
+  if (projects.length) acc.push({ category: cat, projects })
+  return acc
+ }, [])
+
  return (
  <article className="py-16">
  {/* Header */}
@@ -87,14 +98,23 @@ export default async function ProjectPage({ params }) {
  </div>
  )}
 
- {/* All other projects grid */}
- {otherProjects.length > 0 && (
- <div className="px-6 mt-24">
+ {/* All other projects grid, grouped by category */}
+ {groupedProjects.length > 0 && (
+ <div className="px-6 mt-24 space-y-16">
+ {groupedProjects.map(({ category, projects }) => (
+ <div key={category}>
+ <h3 className="mb-6 text-black/40">
+ {category === project.category
+ ? `More projects from ${CATEGORY_LABELS[category] || category}`
+ : CATEGORY_LABELS[category] || category}
+ </h3>
  <div className="grid grid-cols-2 gap-4 md:grid-cols-3 2xl:grid-cols-6">
- {otherProjects.map(p => (
+ {projects.map(p => (
  <ProjectCard key={p._id} project={p} />
  ))}
  </div>
+ </div>
+ ))}
  </div>
  )}
  </article>
