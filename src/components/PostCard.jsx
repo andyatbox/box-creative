@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, label }) {
  const date = post.publishedAt
  ? new Date(post.publishedAt).toLocaleDateString('en-US', {
  year: 'numeric',
@@ -13,6 +13,7 @@ export default function PostCard({ post }) {
 
  return (
  <Link href={`/posts/${post.slug.current}`} className="group block">
+ {label && <p className="text-black/40 mb-3">{label}</p>}
  {post.thumbnail && (
  <div className="aspect-video overflow-hidden bg-neutral-100 mb-4">
  <Image

@@ -65,6 +65,26 @@ export const postBySlugQuery = `
   }
 `
 
+export const allProjectsQuery = `
+  *[_type == "project"] | order(orderRank) {
+    _id,
+    title,
+    slug,
+    category,
+    thumbnail,
+  }
+`
+
+export const allPostsQuery = `
+  *[_type == "post"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    thumbnail,
+  }
+`
+
 export const pageBySlugQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     _id,

@@ -1,8 +1,9 @@
 import { client } from '@/sanity/client'
-import { projectBySlugQuery } from '@/sanity/queries'
+import { projectBySlugQuery, allProjectsQuery } from '@/sanity/queries'
 import PortableTextRenderer from '@/components/PortableTextRenderer'
 import ColumnsContent from '@/components/ColumnsContent'
 import ImageSlider from '@/components/ImageSlider'
+import ProjectCard from '@/components/ProjectCard'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 60
@@ -16,9 +17,23 @@ const CATEGORY_LABELS = {
 
 export default async function ProjectPage({ params }) {
  const { slug } = await params
- const project = await client.fetch(projectBySlugQuery, { slug })
+ const [project, allProjects] = await Promise.all([
+  client.fetch(projectBySlugQuery, { slug }),
+  client.fetch(allProjectsQuery),
+ ])
 
  if (!project) notFound()
+
+ const categoryProjects = allProjects.filter(p => p.category === project.category)
+ const currentIdx = categoryProjects.findIndex(p => p._id === project._id)
+ const hasPrevNext = categoryProjects.length > 1
+ const prevProject = hasPrevNext
+  ? categoryProjects[(currentIdx - 1 + categoryProjects.length) % categoryProjects.length]
+  : null
+ const nextProject = hasPrevNext
+  ? categoryProjects[(currentIdx + 1) % categoryProjects.length]
+  : null
+ const otherProjects = allProjects.filter(p => p._id !== project._id)
 
  return (
  <article className="py-16">
@@ -61,6 +76,27 @@ export default async function ProjectPage({ params }) {
  <div className="max-w-5xl mx-auto px-6">
  <ColumnsContent groups={project.columnsContent} />
  </div>
+
+ {/* Prev / Next within category */}
+ {hasPrevNext && (
+ <div className="max-w-5xl mx-auto px-6 mt-24 border-t border-black/10 pt-14">
+ <div className="grid grid-cols-2 gap-6">
+ <ProjectCard project={prevProject} label="Previous project" />
+ <ProjectCard project={nextProject} label="Next project" />
+ </div>
+ </div>
+ )}
+
+ {/* All other projects grid */}
+ {otherProjects.length > 0 && (
+ <div className="px-6 mt-24">
+ <div className="grid grid-cols-2 gap-4 md:grid-cols-3 2xl:grid-cols-6">
+ {otherProjects.map(p => (
+ <ProjectCard key={p._id} project={p} />
+ ))}
+ </div>
+ </div>
+ )}
  </article>
  )
 }

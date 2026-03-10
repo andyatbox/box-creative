@@ -2,9 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, label }) {
  return (
  <Link href={`/projects/${project.slug.current}`} className="group block">
+ {label && <p className="text-black/40 mb-3">{label}</p>}
  <div className="aspect-[4/3] overflow-hidden bg-neutral-100">
  {project.thumbnail ? (
  <Image
