@@ -13,7 +13,7 @@ export default function PostCard({ post, label }) {
 
  return (
  <Link href={`/posts/${post.slug.current}`} className="group block">
- {label && <p className="text-black/40 mb-3">{label}</p>}
+ {label && <h2 className="text-black/40 mb-3">{label}</h2>}
  {post.thumbnail && (
  <div className="aspect-video overflow-hidden bg-neutral-100 mb-4">
  <Image
