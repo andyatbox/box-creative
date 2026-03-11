@@ -28,7 +28,7 @@ export default function PostCard({ post, label }) {
  {date && (
  <p className="text-black/40 mb-2">{date}</p>
  )}
- <h3 className="text-base font-medium group-hover:underline underline-offset-4">
+ <h3 className="text-base group-hover:underline underline-offset-4">
  {post.title}
  </h3>
  </Link>

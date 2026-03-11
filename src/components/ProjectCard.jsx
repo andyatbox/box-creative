@@ -21,7 +21,7 @@ export default function ProjectCard({ project, label }) {
  </div>
  )}
  </div>
- <h3 className="mt-3 text-sm font-medium">{project.title}</h3>
+ <h3 className="mt-3">{project.title}</h3>
  </Link>
  )
 }

@@ -52,7 +52,7 @@ export default function ContactForm() {
  required
  value={form.name}
  onChange={handleChange}
- className="w-full border-b border-black/20 py-2 text-sm bg-transparent focus:outline-none focus:border-black transition-colors placeholder:text-black/25"
+ className="w-full border-b border-black/20 py-2 bg-transparent focus:outline-none focus:border-black transition-colors placeholder:text-black/25"
  placeholder="Your name"
  />
  </div>
@@ -71,7 +71,7 @@ export default function ContactForm() {
  required
  value={form.email}
  onChange={handleChange}
- className="w-full border-b border-black/20 py-2 text-sm bg-transparent focus:outline-none focus:border-black transition-colors placeholder:text-black/25"
+ className="w-full border-b border-black/20 py-2 bg-transparent focus:outline-none focus:border-black transition-colors placeholder:text-black/25"
  placeholder="your@email.com"
  />
  </div>
@@ -90,7 +90,7 @@ export default function ContactForm() {
  required
  value={form.message}
  onChange={handleChange}
- className="w-full border-b border-black/20 py-2 text-sm bg-transparent focus:outline-none focus:border-black transition-colors resize-none placeholder:text-black/25"
+ className="w-full border-b border-black/20 py-2 bg-transparent focus:outline-none focus:border-black transition-colors resize-none placeholder:text-black/25"
  placeholder="Tell me about your project..."
  />
  </div>

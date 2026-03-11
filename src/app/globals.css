@@ -15,7 +15,8 @@ html {
   font-size: 20px;
 }
 
-body, p, li, label, input, textarea, button, span, a, div {
+body, p, li, label, input, textarea, button, span, a, div,
+h2, h3, h4, h5, h6 {
   font-family: 'new-spirit-condensed', serif !important;
   font-weight: 300 !important;
 }
