@@ -60,11 +60,12 @@ export default async function ProjectPage({ params }) {
 
  {/* Video */}
  {project.videoUrl && (
- <div className="max-w-5xl mx-auto px-6 mb-14">
+ <div className="max-w-7xl mx-auto 2xl:px-6 mb-14">
  <div className="aspect-video bg-black">
  <video
  src={project.videoUrl}
  controls
+ playsInline
  className="w-full h-full"
  />
  </div>
@@ -84,7 +85,7 @@ export default async function ProjectPage({ params }) {
  <PortableTextRenderer value={project.body} />
  </div>
  )}
- <div className="max-w-5xl mx-auto px-6">
+ <div className="max-w-7xl mx-auto px-6">
  <ColumnsContent groups={project.columnsContent} />
  </div>
 

@@ -45,7 +45,7 @@ const makeComponents = (compact) => ({
  <h4 className="text-base mt-8 mb-3">{children}</h4>
  ),
  normal: ({ children }) => (
- <p className="mb-6 text-black/80">{children}</p>
+ <p className="mb-6 ">{children}</p>
  ),
  blockquote: ({ children }) => (
  <blockquote className="my-8 pl-6 border-l-2 border-black/15 text-black/55 italic">
@@ -70,10 +70,10 @@ const makeComponents = (compact) => ({
  },
  list: {
  bullet: ({ children }) => (
- <ul className="list-disc pl-6 mb-6 space-y-2 text-black/80">{children}</ul>
+ <ul className="list-disc pl-6 mb-6 space-y-2">{children}</ul>
  ),
  number: ({ children }) => (
- <ol className="list-decimal pl-6 mb-6 space-y-2 text-black/80">{children}</ol>
+ <ol className="list-decimal pl-6 mb-6 space-y-2">{children}</ol>
  ),
  },
  listItem: {

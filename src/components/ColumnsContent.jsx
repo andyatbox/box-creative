@@ -14,12 +14,12 @@ export default function ColumnsContent({ groups }) {
             key={i}
             className={
               group.columns === '3'
-                ? 'grid grid-cols-1 gap-4 md:grid-cols-3'
-                : 'grid grid-cols-1 gap-4 md:grid-cols-2'
+                ? 'grid grid-cols-1 gap-4 md:gap-10 md:grid-cols-3'
+                : 'grid grid-cols-1 gap-4 md:gap-10 md:grid-cols-2'
             }
           >
             {cols.map((col, j) => (
-              <div key={j}>
+              <div key={j} className={group.columns === '3' ? '' : 'flex items-center justify-center p-6'}>
                 <PortableTextRenderer value={col} compact />
               </div>
             ))}

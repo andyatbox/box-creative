@@ -35,3 +35,7 @@ h1, h2 {
   font-family: 'gotham', sans-serif !important;
   font-weight: 700 !important;
 }
+
+nav a {
+  font-weight: 700 !important;
+}
