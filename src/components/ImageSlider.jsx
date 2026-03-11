@@ -46,7 +46,7 @@ export default function ImageSlider({ images }) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto 2xl:px-6">
       <div
         className="relative aspect-video overflow-hidden bg-neutral-100 cursor-grab active:cursor-grabbing"
         onTouchStart={handleTouchStart}

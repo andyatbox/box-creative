@@ -103,7 +103,7 @@ export default async function ProjectPage({ params }) {
  <div className="px-6 mt-24 space-y-16">
  {groupedProjects.map(({ category, projects }) => (
  <div key={category}>
- <h2 className="mb-6">
+ <h2 className="text-3xl mb-6">
  {category === project.category
  ? `More projects from ${CATEGORY_LABELS[category] || category}`
  : CATEGORY_LABELS[category] || category}

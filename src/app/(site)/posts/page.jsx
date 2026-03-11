@@ -26,7 +26,7 @@ export default async function PostsPage({ searchParams }) {
 
  return (
  <div className="max-w-7xl mx-auto px-6 py-16">
- <h1 className="text-black/35 mb-14">Posts</h1>
+ <h1 className="text-4xl mb-14">Posts</h1>
 
  {posts.length === 0 ? (
  <div className="flex items-center justify-center py-40">
