@@ -39,7 +39,7 @@ export default async function PostPage({ params }) {
  <article className="py-16">
  <div className="max-w-3xl mx-auto px-6">
  {date && (
- <p className="text-black/40 mb-5">{date}</p>
+ <p className="mb-5">{date}</p>
  )}
  <h1 className="text-4xl mb-12">{post.title}</h1>
  </div>

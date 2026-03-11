@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }) {
  {/* Header */}
  <div className="max-w-5xl mx-auto px-6 mb-14">
  {project.category && (
- <p className="text-black/40 mb-4">
+ <p className="mb-4">
  {CATEGORY_LABELS[project.category] || project.category}
  </p>
  )}

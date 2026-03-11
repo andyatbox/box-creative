@@ -14,7 +14,7 @@ const makeComponents = (compact) => ({
  className="w-full object-cover"
  />
  {value.caption && (
- <figcaption className="mt-3 text-center text-black/40">
+ <figcaption className="mt-3 text-center">
  {value.caption}
  </figcaption>
  )}

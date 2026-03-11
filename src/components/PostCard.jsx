@@ -13,7 +13,7 @@ export default function PostCard({ post, label }) {
 
  return (
  <Link href={`/posts/${post.slug.current}`} className="group block">
- {label && <h2 className="text-black/40 mb-3">{label}</h2>}
+ {label && <h2 className="mb-3">{label}</h2>}
  {post.thumbnail && (
  <div className="aspect-video overflow-hidden bg-neutral-100 mb-4">
  <Image
@@ -26,7 +26,7 @@ export default function PostCard({ post, label }) {
  </div>
  )}
  {date && (
- <p className="text-black/40 mb-2">{date}</p>
+ <p className="mb-2">{date}</p>
  )}
  <h3 className="text-base group-hover:underline underline-offset-4">
  {post.title}

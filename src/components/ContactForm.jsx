@@ -41,7 +41,7 @@ export default function ContactForm() {
  <div>
  <label
  htmlFor="name"
- className="block text-black/40 mb-3"
+ className="block mb-3"
  >
  Name
  </label>
@@ -60,7 +60,7 @@ export default function ContactForm() {
  <div>
  <label
  htmlFor="email"
- className="block text-black/40 mb-3"
+ className="block mb-3"
  >
  Email
  </label>
@@ -79,7 +79,7 @@ export default function ContactForm() {
  <div>
  <label
  htmlFor="message"
- className="block text-black/40 mb-3"
+ className="block mb-3"
  >
  Message
  </label>
