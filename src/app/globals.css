@@ -31,7 +31,7 @@ strong, b {
   font-weight: 600 !important;
 }
 
-h1 {
+h1, h2 {
   font-family: 'gotham', sans-serif !important;
   font-weight: 700 !important;
 }

@@ -103,11 +103,11 @@ export default async function ProjectPage({ params }) {
  <div className="px-6 mt-24 space-y-16">
  {groupedProjects.map(({ category, projects }) => (
  <div key={category}>
- <h3 className="mb-6 text-black/40">
+ <h2 className="mb-6">
  {category === project.category
  ? `More projects from ${CATEGORY_LABELS[category] || category}`
  : CATEGORY_LABELS[category] || category}
- </h3>
+ </h2>
  <div className="grid grid-cols-2 gap-4 md:grid-cols-3 2xl:grid-cols-6">
  {projects.map(p => (
  <ProjectCard key={p._id} project={p} />
