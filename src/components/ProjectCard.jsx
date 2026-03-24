@@ -5,8 +5,8 @@ import { urlFor } from '@/sanity/image'
 export default function ProjectCard({ project, label }) {
  return (
  <Link href={`/projects/${project.slug.current}`} className="group block">
- {label && <h2 className="text-3xl mb-3">{label}</h2>}
- <div className="aspect-[4/3] overflow-hidden bg-neutral-100">
+ {label && <h2 className="text-xl md:text-3xl mb-3">{label}</h2>}
+ <div className="aspect-[4/3] overflow-hidden bg-neutral-100 rounded-lg">
  {project.thumbnail ? (
  <Image
  src={urlFor(project.thumbnail).width(800).height(600).url()}
@@ -21,7 +21,7 @@ export default function ProjectCard({ project, label }) {
  </div>
  )}
  </div>
- <h3 className="text-2xl mt-3">{project.title}</h3>
+ <h3 className="md:text-2xl mt-3">{project.title}</h3>
  </Link>
  )
 }

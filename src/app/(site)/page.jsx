@@ -23,7 +23,7 @@ export default async function HomePage() {
  return (
  <section key={value} className="mb-24">
  <div className="mb-8 pb-4 border-b border-black/10">
- <h2 className="text-3xl">{label}</h2>
+ <h2 className="text-xl md:text-3xl">{label}</h2>
  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
  {categoryProjects.map((project) => (

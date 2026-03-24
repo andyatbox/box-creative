@@ -46,7 +46,7 @@ export default async function PostPage({ params }) {
 
  {post.thumbnail && (
  <div className="max-w-3xl mx-auto px-6 mb-14">
- <div className="aspect-video overflow-hidden bg-neutral-100">
+ <div className="aspect-video overflow-hidden bg-neutral-100 rounded-lg">
  <Image
  src={urlFor(post.thumbnail).width(1200).height(675).url()}
  alt={post.title}

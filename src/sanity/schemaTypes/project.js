@@ -44,9 +44,9 @@ export default {
     },
     {
       name: 'videoUrl',
-      title: 'Video URL (CDN)',
+      title: 'Vimeo URL',
       type: 'url',
-      description: 'URL to video hosted on your CDN.',
+      description: 'Vimeo video URL, e.g. https://vimeo.com/123456789',
     },
     {
       name: 'gallery',

@@ -58,19 +58,22 @@ export default async function ProjectPage({ params }) {
  <h1 className="text-4xl">{project.title}</h1>
  </div>
 
- {/* Video */}
- {project.videoUrl && (
+ {/* Vimeo video */}
+ {project.videoUrl && (() => {
+ const vimeoId = project.videoUrl.match(/vimeo\.com\/(\d+)/)?.[1]
+ return vimeoId ? (
  <div className="max-w-7xl mx-auto 2xl:px-6 mb-14">
- <div className="aspect-video bg-black">
- <video
- src={project.videoUrl}
- controls
- playsInline
+ <div className="aspect-video bg-black rounded-lg overflow-hidden">
+ <iframe
+ src={`https://player.vimeo.com/video/${vimeoId}`}
+ allow="autoplay; fullscreen; picture-in-picture"
+ allowFullScreen
  className="w-full h-full"
  />
  </div>
  </div>
- )}
+ ) : null
+ })()}
 
  {/* Image gallery slider */}
  {project.gallery?.length > 0 && (
@@ -104,12 +107,12 @@ export default async function ProjectPage({ params }) {
  <div className="px-6 mt-24 space-y-16">
  {groupedProjects.map(({ category, projects }) => (
  <div key={category}>
- <h2 className="text-3xl mb-6">
+ <h2 className="text-xl md:text-3xl mb-6">
  {category === project.category
  ? `More projects from ${CATEGORY_LABELS[category] || category}`
  : CATEGORY_LABELS[category] || category}
  </h2>
- <div className="grid grid-cols-2 gap-4 md:grid-cols-3 2xl:grid-cols-6">
+ <div className="grid grid-cols-2 gap-4 md:gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
  {projects.map(p => (
  <ProjectCard key={p._id} project={p} />
  ))}
