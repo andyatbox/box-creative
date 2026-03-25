@@ -34,6 +34,15 @@ export const projectBySlugQuery = `
 `
 
 
+export const navPagesQuery = `
+  *[_type == "page" && showInNav == true] | order(orderRank) {
+    _id,
+    title,
+    navLabel,
+    slug,
+  }
+`
+
 export const allProjectsQuery = `
   *[_type == "project"] | order(orderRank) {
     _id,

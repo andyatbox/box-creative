@@ -20,7 +20,7 @@ export default defineConfig({
           .title('Content')
           .items([
             orderableDocumentListDeskItem({ type: 'project', title: 'Projects', S, context }),
-            S.documentTypeListItem('page').title('Pages'),
+            orderableDocumentListDeskItem({ type: 'page', title: 'Pages', S, context }),
             S.documentTypeListItem('contactSubmission').title('Contact Submissions'),
           ]),
     }),

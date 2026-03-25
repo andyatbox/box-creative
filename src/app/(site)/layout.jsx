@@ -1,9 +1,12 @@
 import Navigation from '@/components/Navigation'
+import { client } from '@/sanity/client'
+import { navPagesQuery } from '@/sanity/queries'
 
-export default function SiteLayout({ children }) {
+export default async function SiteLayout({ children }) {
+ const navPages = await client.fetch(navPagesQuery)
  return (
  <>
- <Navigation />
+ <Navigation navPages={navPages} />
  <main>{children}</main>
  <footer className="border-t border-black/10 mt-24 py-10 px-6">
  <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-black/30">

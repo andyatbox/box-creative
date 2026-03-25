@@ -4,13 +4,20 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-const navLinks = [
+const STATIC_START = [
  { label: 'Home / Works', href: '/' },
  { label: 'About Box', href: '/about' },
+]
+const STATIC_END = [
  { label: 'Contact', href: '/contact' },
 ]
 
-export default function Navigation() {
+export default function Navigation({ navPages = [] }) {
+ const dynamicLinks = navPages.map(p => ({
+  label: p.navLabel || p.title,
+  href: `/${p.slug.current}`,
+ }))
+ const navLinks = [...STATIC_START, ...dynamicLinks, ...STATIC_END]
  const pathname = usePathname()
  const [menuOpen, setMenuOpen] = useState(false)
 

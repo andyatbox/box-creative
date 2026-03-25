@@ -19,7 +19,7 @@ export default function ColumnsContent({ groups }) {
             }
           >
             {cols.map((col, j) => (
-              <div key={j} className={group.columns === '3' ? '' : 'flex items-center justify-center p-6'}>
+              <div key={j} className={group.columns === '3' ? '' : 'flex flex-col items-center justify-center p-6'}>
                 <PortableTextRenderer value={col} compact />
               </div>
             ))}
