@@ -94,8 +94,8 @@ export default async function ProjectPage({ params }) {
  {hasPrevNext && (
  <div className="max-w-5xl mx-auto px-6 mt-24 border-t border-black/10 pt-14">
  <div className="grid grid-cols-2 gap-6">
- <ProjectCard project={prevProject} label="Previous project" />
- <ProjectCard project={nextProject} label="Next project" />
+ <ProjectCard project={prevProject} label={`Previous ${CATEGORY_LABELS[project.category] || project.category} project`} />
+ <ProjectCard project={nextProject} label={`Next ${CATEGORY_LABELS[project.category] || project.category} project`} />
  </div>
  </div>
  )}

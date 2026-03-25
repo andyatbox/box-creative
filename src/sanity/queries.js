@@ -33,37 +33,6 @@ export const projectBySlugQuery = `
   }
 `
 
-export const postsQuery = `
-  *[_type == "post"] | order(publishedAt desc) [$start...$end] {
-    _id,
-    title,
-    slug,
-    publishedAt,
-    thumbnail,
-  }
-`
-
-export const postsCountQuery = `count(*[_type == "post"])`
-
-export const postBySlugQuery = `
-  *[_type == "post" && slug.current == $slug][0] {
-    _id,
-    title,
-    slug,
-    publishedAt,
-    thumbnail,
-    body[] {
-      ...,
-      _type == "image" => { ..., asset-> }
-    },
-    columnsContent[] {
-      columns,
-      column1[] { ..., _type == "image" => { ..., asset-> } },
-      column2[] { ..., _type == "image" => { ..., asset-> } },
-      column3[] { ..., _type == "image" => { ..., asset-> } }
-    }
-  }
-`
 
 export const allProjectsQuery = `
   *[_type == "project"] | order(orderRank) {
@@ -75,15 +44,6 @@ export const allProjectsQuery = `
   }
 `
 
-export const allPostsQuery = `
-  *[_type == "post"] | order(publishedAt desc) {
-    _id,
-    title,
-    slug,
-    publishedAt,
-    thumbnail,
-  }
-`
 
 export const pageBySlugQuery = `
   *[_type == "page" && slug.current == $slug][0] {
