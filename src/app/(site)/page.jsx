@@ -6,9 +6,7 @@ export const revalidate = 60
 
 const CATEGORIES = [
  { value: 'branding-print', label: 'Branding & Print' },
- { value: 'immersive-ux', label: 'Immersive UX' },
- { value: 'web-app-design-dev', label: 'Web/App Design & Dev' },
- { value: 'advertising', label: 'Advertising' },
+ { value: 'immersive-ux', label: 'Interactive Experiences' },
 ]
 
 export default async function HomePage() {

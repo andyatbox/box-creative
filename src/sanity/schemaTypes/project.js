@@ -28,9 +28,7 @@ export default {
       options: {
         list: [
           { title: 'Branding & Print', value: 'branding-print' },
-          { title: 'Immersive UX', value: 'immersive-ux' },
-          { title: 'Web/App Design & Dev', value: 'web-app-design-dev' },
-          { title: 'Advertising', value: 'advertising' },
+          { title: 'Interactive Experiences', value: 'immersive-ux' },
         ],
         layout: 'radio',
       },
@@ -127,9 +125,7 @@ export default {
     prepare({ title, category, media }) {
       const labels = {
         'branding-print': 'Branding & Print',
-        'immersive-ux': 'Immersive UX',
-        'web-app-design-dev': 'Web/App Design & Dev',
-        advertising: 'Advertising',
+        'immersive-ux': 'Interactive Experiences',
       }
       return { title, subtitle: labels[category] || category, media }
     },
