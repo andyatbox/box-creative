@@ -6,8 +6,8 @@ import { urlFor } from '@/sanity/image'
 
 export default function ImageSlider({ images }) {
   const [current, setCurrent] = useState(0)
-  const touchStartX = useRef(null)
-  const touchDeltaX = useRef(0)
+  const startX = useRef(null)
+  const deltaX = useRef(0)
   const [dragOffset, setDragOffset] = useState(0)
   const isDragging = useRef(false)
 
@@ -23,35 +23,40 @@ export default function ImageSlider({ images }) {
   const prev = () => goTo(current - 1)
   const next = () => goTo(current + 1)
 
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX
-    touchDeltaX.current = 0
+  const dragStart = (x) => {
+    startX.current = x
+    deltaX.current = 0
     isDragging.current = true
   }
 
-  const handleTouchMove = (e) => {
+  const dragMove = (x) => {
     if (!isDragging.current) return
-    touchDeltaX.current = e.touches[0].clientX - touchStartX.current
-    setDragOffset(touchDeltaX.current)
+    deltaX.current = x - startX.current
+    setDragOffset(deltaX.current)
   }
 
-  const handleTouchEnd = () => {
-    if (Math.abs(touchDeltaX.current) > 50) {
-      touchDeltaX.current < 0 ? next() : prev()
+  const dragEnd = () => {
+    if (!isDragging.current) return
+    if (Math.abs(deltaX.current) > 50) {
+      deltaX.current < 0 ? next() : prev()
     } else {
       setDragOffset(0)
     }
     isDragging.current = false
-    touchDeltaX.current = 0
+    deltaX.current = 0
   }
 
   return (
-    <div className="max-w-7xl mx-auto 2xl:px-6">
+    <div className="max-w-7xl mx-auto px-6">
       <div
-        className="relative aspect-video overflow-hidden bg-neutral-100 rounded-lg cursor-grab active:cursor-grabbing"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        className="relative aspect-video overflow-hidden bg-neutral-100 rounded-lg cursor-grab active:cursor-grabbing touch-none select-none"
+        onTouchStart={(e) => dragStart(e.touches[0].clientX)}
+        onTouchMove={(e) => dragMove(e.touches[0].clientX)}
+        onTouchEnd={dragEnd}
+        onMouseDown={(e) => dragStart(e.clientX)}
+        onMouseMove={(e) => dragMove(e.clientX)}
+        onMouseUp={dragEnd}
+        onMouseLeave={dragEnd}
       >
         {/* Slide track */}
         <div
