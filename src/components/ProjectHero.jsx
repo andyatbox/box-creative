@@ -61,13 +61,10 @@ export default function ProjectHero({ thumbnailUrl, category, title }) {
         />
       )}
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/40" />
-
       {/* Centered header */}
       <div
         className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6"
-        style={fadeStyle}
+        style={{ ...fadeStyle, textShadow: '0 2px 16px rgba(0,0,0,0.5)' }}
       >
         {category && (
           <p className="mb-3 text-white/80 tracking-wide">{category}</p>
@@ -80,7 +77,7 @@ export default function ProjectHero({ thumbnailUrl, category, title }) {
       {/* Scroll chevron */}
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-        style={fadeStyle}
+        style={{ ...fadeStyle, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))' }}
       >
         <svg
           width="32"
