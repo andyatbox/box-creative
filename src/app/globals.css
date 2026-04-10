@@ -43,3 +43,19 @@ h1, h2 {
 nav a {
   font-weight: 700 !important;
 }
+
+.hero-title {
+  font-family: 'new-spirit-condensed', serif !important;
+  font-weight: 300 !important;
+  -webkit-font-feature-settings: "ss01" 1 !important;
+  font-feature-settings: "ss01" 1 !important;
+}
+
+.vimeo-wrapper {
+  margin-top: 0;
+  transition: margin-top 0.8s ease;
+}
+
+body.project-entered .vimeo-wrapper {
+  margin-top: -25vh;
+}

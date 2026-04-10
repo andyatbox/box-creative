@@ -4,6 +4,8 @@ import PortableTextRenderer from '@/components/PortableTextRenderer'
 import ColumnsContent from '@/components/ColumnsContent'
 import ImageSlider from '@/components/ImageSlider'
 import ProjectCard from '@/components/ProjectCard'
+import ProjectHero from '@/components/ProjectHero'
+import { urlFor } from '@/sanity/image'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 60
@@ -44,23 +46,25 @@ export default async function ProjectPage({ params }) {
   return acc
  }, [])
 
- return (
- <article className="py-16">
- {/* Header */}
- <div className="max-w-5xl mx-auto px-6 mb-14">
- {project.category && (
- <p className="mb-4">
- {CATEGORY_LABELS[project.category] || project.category}
- </p>
- )}
- <h1 className="text-4xl">{project.title}</h1>
- </div>
+ const thumbnailUrl = project.thumbnail
+  ? urlFor(project.thumbnail).width(2400).height(1350).url()
+  : null
 
+ return (
+ <article>
+ {/* Full-screen hero */}
+ <ProjectHero
+  thumbnailUrl={thumbnailUrl}
+  category={CATEGORY_LABELS[project.category] || project.category}
+  title={project.title}
+ />
+
+ <div className="relative py-16">
  {/* Vimeo video */}
  {project.videoUrl && (() => {
  const vimeoId = project.videoUrl.match(/vimeo\.com\/(\d+)/)?.[1]
  return vimeoId ? (
- <div className="max-w-7xl mx-auto 2xl:px-6 mb-14">
+ <div className="vimeo-wrapper max-w-7xl mx-auto px-6 mb-14">
  <div className="aspect-video bg-black rounded-lg overflow-hidden">
  <iframe
  src={`https://player.vimeo.com/video/${vimeoId}`}
@@ -119,6 +123,7 @@ export default async function ProjectPage({ params }) {
  ))}
  </div>
  )}
+ </div>
  </article>
  )
 }
