@@ -62,7 +62,7 @@ export default async function ProjectPage({ params }) {
  <div className="relative py-16">
  {/* Vimeo video */}
  {project.videoUrl && (() => {
- const vimeoId = project.videoUrl.match(/vimeo\.com\/(\d+)/)?.[1]
+ const vimeoId = project.videoUrl.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1]
  return vimeoId ? (
  <div className="vimeo-wrapper max-w-7xl mx-auto px-6 mb-14">
  <div className="aspect-video bg-black rounded-lg overflow-hidden">

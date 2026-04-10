@@ -42,9 +42,10 @@ export default {
     },
     {
       name: 'videoUrl',
-      title: 'Vimeo URL',
-      type: 'url',
-      description: 'Vimeo video URL, e.g. https://vimeo.com/123456789',
+      title: 'Vimeo URL or Embed Code',
+      type: 'text',
+      rows: 3,
+      description: 'Paste a Vimeo URL (https://vimeo.com/123456789) or the full embed code.',
     },
     {
       name: 'gallery',
