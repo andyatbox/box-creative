@@ -61,7 +61,7 @@ export default function Navigation({ navPages = [] }) {
  {(header?.category || header?.title) && (
  <>
  <div className="h-14 w-px bg-black/30 shrink-0" aria-hidden />
- <div className="flex flex-col justify-center min-w-0">
+ <div className="flex flex-col justify-center min-w-0 min-[992px]:min-w-[15vw]">
  {header?.category && (
  <p className="text-black truncate max-w-full leading-tight text-left">{header.category}</p>
  )}
