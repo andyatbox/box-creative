@@ -31,7 +31,7 @@ export default function Navigation({ navPages = [] }) {
 
  return (
  <header className="sticky top-0 z-50 bg-white/30 backdrop-blur-md backdrop-saturate-150 border-b border-black/10">
- <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-8">
+ <div className="max-w-7xl mx-auto px-6 min-[992px]:px-24 flex items-center justify-between gap-8">
  <div className="flex items-center gap-6 min-w-0">
  <Link href="/" className="shrink-0">
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 261.65 185.753" className="h-[100px] w-auto">
