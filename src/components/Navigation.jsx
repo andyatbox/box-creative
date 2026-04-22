@@ -75,7 +75,7 @@ export default function Navigation({ navPages = [] }) {
  </div>
 
  {/* Desktop nav */}
- <nav className="hidden min-[992px]:flex flex-1 items-center justify-between gap-8">
+ <nav className={`hidden min-[992px]:flex flex-1 items-center justify-between gap-8 ${!header ? 'pl-40' : ''}`}>
  {navLinks.map(({ label, href }) => (
  <Link
  key={href}
