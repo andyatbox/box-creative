@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
-export default function ProjectHero({ thumbnailUrl, category, title }) {
+export default function ProjectHero({ thumbnailUrl, title }) {
   const [height, setHeight] = useState(null)
   const [visible, setVisible] = useState(false)
 
@@ -61,30 +61,17 @@ export default function ProjectHero({ thumbnailUrl, category, title }) {
         />
       )}
 
-      {/* Centered header */}
-      <div
-        className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6"
-        style={{ ...fadeStyle, textShadow: '0 2px 16px rgba(0,0,0,0.5)' }}
-      >
-        {category && (
-          <p className="mb-3 text-white/80 tracking-wide">{category}</p>
-        )}
-        <h1 className="hero-title text-4xl md:text-6xl text-white">
-          {title}
-        </h1>
-      </div>
-
       {/* Scroll chevron */}
       <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-        style={{ ...fadeStyle, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))' }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce flex items-center justify-center w-14 h-14 rounded-full bg-white/30 backdrop-blur-md backdrop-saturate-150"
+        style={fadeStyle}
       >
         <svg
           width="32"
           height="32"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="white"
+          stroke="black"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

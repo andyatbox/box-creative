@@ -3,28 +3,37 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { useHeader } from './HeaderContext'
 
 const STATIC_START = [
- { label: 'Home / Works', href: '/' },
- { label: 'About Box', href: '/about' },
+ { label: 'Our\nWork', href: '/' },
+ { label: 'About\nBox', href: '/about' },
 ]
 const STATIC_END = [
- { label: 'Contact', href: '/contact' },
+ { label: 'Contact\nUs', href: '/contact' },
 ]
+const LABEL_OVERRIDES = {
+ 'Services': 'Box\nServices',
+}
 
 export default function Navigation({ navPages = [] }) {
- const dynamicLinks = navPages.map(p => ({
-  label: p.navLabel || p.title,
-  href: `/${p.slug.current}`,
- }))
+ const dynamicLinks = navPages.map(p => {
+  const raw = p.navLabel || p.title
+  return {
+   label: LABEL_OVERRIDES[raw] || raw,
+   href: `/${p.slug.current}`,
+  }
+ })
  const navLinks = [...STATIC_START, ...dynamicLinks, ...STATIC_END]
  const pathname = usePathname()
  const [menuOpen, setMenuOpen] = useState(false)
+ const { header } = useHeader() || {}
 
  return (
  <header className="sticky top-0 z-50 bg-white/30 backdrop-blur-md backdrop-saturate-150 border-b border-black/10">
- <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
- <Link href="/" className="">
+ <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-8">
+ <div className="flex items-center gap-6 min-w-0">
+ <Link href="/" className="shrink-0">
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 261.65 185.753" className="h-[100px] w-auto">
    <g>
      <polygon points="98.267 88.295 101.89 85.304 105.511 82.314 109.135 79.325 112.756 76.333 116.379 73.343 120.004 70.353 123.625 67.363 61.811 16.331 0 67.363 0 118.39 61.811 169.422 123.625 118.39 92.717 92.875 94.645 91.285 98.267 88.295"/>
@@ -48,13 +57,30 @@ export default function Navigation({ navPages = [] }) {
  </svg>
  </Link>
 
+ {/* Project title next to logo, with dividers */}
+ {(header?.category || header?.title) && (
+ <>
+ <div className="h-14 w-px bg-black/30 shrink-0" aria-hidden />
+ <div className="flex flex-col justify-center min-w-0">
+ {header?.category && (
+ <p className="text-black truncate max-w-full leading-tight text-left">{header.category}</p>
+ )}
+ {header?.title && (
+ <p className="header-project-title text-black truncate max-w-full leading-tight text-left">{header.title}</p>
+ )}
+ </div>
+ <div className="hidden min-[992px]:block h-14 w-px bg-black/30 shrink-0" aria-hidden />
+ </>
+ )}
+ </div>
+
  {/* Desktop nav */}
- <nav className="hidden md:flex items-center gap-10">
+ <nav className="hidden min-[992px]:flex flex-1 items-center justify-between gap-8">
  {navLinks.map(({ label, href }) => (
  <Link
  key={href}
  href={href}
- className={`font-bold relative after:absolute after:bottom-0 after:left-0 after:h-[3px] after:bg-black after:transition-all after:duration-300 ${
+ className={`font-bold whitespace-pre-line text-left leading-tight relative after:absolute after:bottom-0 after:left-0 after:h-[3px] after:bg-black after:transition-all after:duration-300 ${
  pathname === href ? 'after:w-full' : 'after:w-0 hover:after:w-full'
  }`}
  >
@@ -65,7 +91,7 @@ export default function Navigation({ navPages = [] }) {
 
  {/* Mobile hamburger */}
  <button
- className="md:hidden flex flex-col gap-1.5 p-2"
+ className="min-[992px]:hidden flex flex-col gap-1.5 p-2"
  onClick={() => setMenuOpen((o) => !o)}
  aria-label="Toggle menu"
  >
@@ -77,14 +103,14 @@ export default function Navigation({ navPages = [] }) {
 
  {/* Mobile menu */}
  {menuOpen && (
- <div className="md:hidden bg-white border-t border-black/10">
- <nav className="flex flex-col px-6 py-6 gap-5">
+ <div className="min-[992px]:hidden bg-white border-t border-black/10">
+ <nav className="grid grid-cols-2 md:flex md:flex-row md:items-center md:justify-between px-6 py-6 gap-5">
  {navLinks.map(({ label, href }) => (
  <Link
  key={href}
  href={href}
  onClick={() => setMenuOpen(false)}
- className={`font-bold relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[3px] after:bg-black after:transition-all after:duration-300 ${
+ className={`font-bold whitespace-pre-line text-left leading-tight relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[3px] after:bg-black after:transition-all after:duration-300 ${
  pathname === href ? 'after:w-full' : 'after:w-0'
  }`}
  >

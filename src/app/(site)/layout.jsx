@@ -1,11 +1,12 @@
 import Navigation from '@/components/Navigation'
+import { HeaderProvider } from '@/components/HeaderContext'
 import { client } from '@/sanity/client'
 import { navPagesQuery } from '@/sanity/queries'
 
 export default async function SiteLayout({ children }) {
  const navPages = await client.fetch(navPagesQuery)
  return (
- <>
+ <HeaderProvider>
  <Navigation navPages={navPages} />
  <main>{children}</main>
  <footer className="border-t border-black/10 mt-24 py-10 px-6">
@@ -14,6 +15,6 @@ export default async function SiteLayout({ children }) {
  <span>© {new Date().getFullYear()}</span>
  </div>
  </footer>
- </>
+ </HeaderProvider>
  )
 }

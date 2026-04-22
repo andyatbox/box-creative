@@ -40,8 +40,13 @@ h1, h2 {
   font-weight: 700 !important;
 }
 
-nav a {
+nav a,
+.header-project-title,
+p.header-project-title {
+  font-family: 'new-spirit-condensed', serif !important;
   font-weight: 700 !important;
+  -webkit-font-feature-settings: "ss01" 1 !important;
+  font-feature-settings: "ss01" 1 !important;
 }
 
 .hero-title {

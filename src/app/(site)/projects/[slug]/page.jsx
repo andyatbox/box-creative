@@ -5,6 +5,7 @@ import ColumnsContent from '@/components/ColumnsContent'
 import ImageSlider from '@/components/ImageSlider'
 import ProjectCard from '@/components/ProjectCard'
 import ProjectHero from '@/components/ProjectHero'
+import { HeaderTitleSetter } from '@/components/HeaderContext'
 import { urlFor } from '@/sanity/image'
 import { notFound } from 'next/navigation'
 
@@ -52,10 +53,13 @@ export default async function ProjectPage({ params }) {
 
  return (
  <article>
+ <HeaderTitleSetter
+  category={CATEGORY_LABELS[project.category] || project.category}
+  title={project.title}
+ />
  {/* Full-screen hero */}
  <ProjectHero
   thumbnailUrl={thumbnailUrl}
-  category={CATEGORY_LABELS[project.category] || project.category}
   title={project.title}
  />
 
