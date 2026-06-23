@@ -26,6 +26,10 @@ export default function Navigation({ navPages = [] }) {
  })
  const navLinks = [...STATIC_START, ...dynamicLinks, ...STATIC_END]
  const pathname = usePathname()
+ const isActive = (href) =>
+  href === '/'
+   ? pathname === '/' || pathname.startsWith('/projects')
+   : pathname === href
  const [menuOpen, setMenuOpen] = useState(false)
  const { header } = useHeader() || {}
 
@@ -81,7 +85,7 @@ export default function Navigation({ navPages = [] }) {
  key={href}
  href={href}
  className={`font-bold whitespace-pre-line text-left leading-tight relative after:absolute after:bottom-0 after:left-0 after:h-[3px] after:bg-black after:transition-all after:duration-300 ${
- pathname === href ? 'after:w-full' : 'after:w-0 hover:after:w-full'
+ isActive(href) ? 'after:w-full' : 'after:w-0 hover:after:w-full'
  }`}
  >
  {label}
@@ -111,7 +115,7 @@ export default function Navigation({ navPages = [] }) {
  href={href}
  onClick={() => setMenuOpen(false)}
  className={`font-bold whitespace-pre-line text-left leading-tight relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[3px] after:bg-black after:transition-all after:duration-300 ${
- pathname === href ? 'after:w-full' : 'after:w-0'
+ isActive(href) ? 'after:w-full' : 'after:w-0'
  }`}
  >
  {label}
