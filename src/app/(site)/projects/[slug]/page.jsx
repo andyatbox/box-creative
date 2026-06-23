@@ -14,6 +14,7 @@ export const revalidate = 60
 const CATEGORY_LABELS = {
  'branding-print': 'Branding & Print',
  'immersive-ux': 'Interactive Experiences',
+ 'advertising-rich-media': 'Advertising Rich Media',
 }
 
 export default async function ProjectPage({ params }) {

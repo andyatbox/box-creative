@@ -29,6 +29,7 @@ export default {
         list: [
           { title: 'Branding & Print', value: 'branding-print' },
           { title: 'Interactive Experiences', value: 'immersive-ux' },
+          { title: 'Advertising Rich Media', value: 'advertising-rich-media' },
         ],
         layout: 'radio',
       },
@@ -127,6 +128,7 @@ export default {
       const labels = {
         'branding-print': 'Branding & Print',
         'immersive-ux': 'Interactive Experiences',
+        'advertising-rich-media': 'Advertising Rich Media',
       }
       return { title, subtitle: labels[category] || category, media }
     },
