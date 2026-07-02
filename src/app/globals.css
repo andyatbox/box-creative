@@ -56,11 +56,11 @@ p.header-project-title {
   font-feature-settings: "ss01" 1 !important;
 }
 
-.vimeo-wrapper {
+.video-wrapper {
   margin-top: 0;
   transition: margin-top 0.8s ease;
 }
 
-body.project-entered .vimeo-wrapper {
+body.project-entered .video-wrapper {
   margin-top: -25vh;
 }

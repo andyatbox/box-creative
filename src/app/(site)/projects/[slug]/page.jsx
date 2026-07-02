@@ -65,14 +65,20 @@ export default async function ProjectPage({ params }) {
  />
 
  <div className="relative py-16">
- {/* Vimeo video */}
+ {/* Video embed (Vimeo or Gumlet) */}
  {project.videoUrl && (() => {
  const vimeoId = project.videoUrl.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1]
- return vimeoId ? (
- <div className="vimeo-wrapper max-w-7xl mx-auto px-6 mb-14">
+ const gumletId = project.videoUrl.match(/gumlet\.io\/embed\/([\w-]+)/)?.[1]
+ const src = vimeoId
+ ? `https://player.vimeo.com/video/${vimeoId}`
+ : gumletId
+ ? `https://play.gumlet.io/embed/${gumletId}`
+ : null
+ return src ? (
+ <div className="video-wrapper max-w-7xl mx-auto px-6 mb-14">
  <div className="aspect-video bg-black rounded-lg overflow-hidden">
  <iframe
- src={`https://player.vimeo.com/video/${vimeoId}`}
+ src={src}
  allow="autoplay; fullscreen; picture-in-picture"
  allowFullScreen
  className="w-full h-full"

@@ -43,10 +43,11 @@ export default {
     },
     {
       name: 'videoUrl',
-      title: 'Vimeo URL or Embed Code',
+      title: 'Video URL or Embed Code',
       type: 'text',
       rows: 3,
-      description: 'Paste a Vimeo URL (https://vimeo.com/123456789) or the full embed code.',
+      description:
+        'Paste a Vimeo URL (https://vimeo.com/123456789), a Gumlet URL (https://play.gumlet.io/embed/ASSET_ID), or the full embed code from either.',
     },
     {
       name: 'gallery',
