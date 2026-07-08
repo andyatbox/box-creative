@@ -15,7 +15,6 @@ export const projectBySlugQuery = `
     slug,
     category,
     thumbnail { ..., asset-> },
-    videoUrl,
     gallery[] {
       ...,
       _type == "image" => { ..., asset-> }

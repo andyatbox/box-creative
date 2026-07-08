@@ -7,7 +7,6 @@ import ProjectCard from '@/components/ProjectCard'
 import ProjectHero from '@/components/ProjectHero'
 import { HeaderTitleSetter } from '@/components/HeaderContext'
 import { urlFor } from '@/sanity/image'
-import { getVideoEmbedSrc } from '@/sanity/videoEmbed'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 60
@@ -66,23 +65,6 @@ export default async function ProjectPage({ params }) {
  />
 
  <div className="relative py-16">
- {/* Video embed (Vimeo or Gumlet) */}
- {project.videoUrl && (() => {
- const src = getVideoEmbedSrc(project.videoUrl)
- return src ? (
- <div className="video-wrapper max-w-7xl mx-auto px-6 mb-14">
- <div className="aspect-video bg-black rounded-lg overflow-hidden">
- <iframe
- src={src}
- allow="autoplay; fullscreen; picture-in-picture"
- allowFullScreen
- className="w-full h-full"
- />
- </div>
- </div>
- ) : null
- })()}
-
  {/* Image gallery slider */}
  {project.gallery?.length > 0 && (
  <div className="mb-14">

@@ -42,14 +42,6 @@ export default {
       options: { hotspot: true },
     },
     {
-      name: 'videoUrl',
-      title: 'Video URL or Embed Code',
-      type: 'text',
-      rows: 3,
-      description:
-        'Paste a Vimeo URL (https://vimeo.com/123456789), a Gumlet URL (https://play.gumlet.io/embed/ASSET_ID), or the full embed code from either.',
-    },
-    {
       name: 'gallery',
       title: 'Gallery',
       description: 'Images and videos displayed in a slider below the main media.',
