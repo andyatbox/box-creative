@@ -67,7 +67,7 @@ export default async function ProjectPage({ params }) {
  <div className="relative py-16">
  {/* Image gallery slider */}
  {project.gallery?.length > 0 && (
- <div className="mb-14">
+ <div className="media-wrapper mb-14">
  <ImageSlider images={project.gallery} />
  </div>
  )}
