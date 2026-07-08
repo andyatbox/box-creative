@@ -51,8 +51,8 @@ export default {
     },
     {
       name: 'gallery',
-      title: 'Image Gallery',
-      description: 'Images displayed in a slider below the main media.',
+      title: 'Gallery',
+      description: 'Images and videos displayed in a slider below the main media.',
       type: 'array',
       of: [
         {
@@ -65,6 +65,28 @@ export default {
               type: 'string',
             },
           ],
+        },
+        {
+          type: 'object',
+          name: 'videoSlide',
+          title: 'Video',
+          fields: [
+            {
+              name: 'videoUrl',
+              title: 'Video URL or Embed Code',
+              type: 'text',
+              rows: 3,
+              description:
+                'Paste a Vimeo URL (https://vimeo.com/123456789), a Gumlet URL (https://play.gumlet.io/embed/ASSET_ID), or the full embed code from either.',
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+          preview: {
+            select: { videoUrl: 'videoUrl' },
+            prepare({ videoUrl }) {
+              return { title: 'Video', subtitle: videoUrl }
+            },
+          },
         },
       ],
     },

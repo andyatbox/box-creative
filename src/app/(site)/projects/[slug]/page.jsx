@@ -7,6 +7,7 @@ import ProjectCard from '@/components/ProjectCard'
 import ProjectHero from '@/components/ProjectHero'
 import { HeaderTitleSetter } from '@/components/HeaderContext'
 import { urlFor } from '@/sanity/image'
+import { getVideoEmbedSrc } from '@/sanity/videoEmbed'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 60
@@ -67,13 +68,7 @@ export default async function ProjectPage({ params }) {
  <div className="relative py-16">
  {/* Video embed (Vimeo or Gumlet) */}
  {project.videoUrl && (() => {
- const vimeoId = project.videoUrl.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1]
- const gumletId = project.videoUrl.match(/gumlet\.io\/embed\/([\w-]+)/)?.[1]
- const src = vimeoId
- ? `https://player.vimeo.com/video/${vimeoId}`
- : gumletId
- ? `https://play.gumlet.io/embed/${gumletId}`
- : null
+ const src = getVideoEmbedSrc(project.videoUrl)
  return src ? (
  <div className="video-wrapper max-w-7xl mx-auto px-6 mb-14">
  <div className="aspect-video bg-black rounded-lg overflow-hidden">

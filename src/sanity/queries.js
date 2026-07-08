@@ -18,7 +18,7 @@ export const projectBySlugQuery = `
     videoUrl,
     gallery[] {
       ...,
-      asset->
+      _type == "image" => { ..., asset-> }
     },
     body[] {
       ...,

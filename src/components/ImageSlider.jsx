@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
+import { getVideoEmbedSrc } from '@/sanity/videoEmbed'
 
 export default function ImageSlider({ images }) {
   const [current, setCurrent] = useState(0)
@@ -67,21 +68,37 @@ export default function ImageSlider({ images }) {
             transition: isDragging.current ? 'none' : 'transform 0.4s ease',
           }}
         >
-          {images.map((image, i) => (
-            <div
-              key={i}
-              className="relative h-full flex-shrink-0"
-              style={{ width: `${100 / count}%` }}
-            >
-              <Image
-                src={urlFor(image).width(1200).height(675).url()}
-                alt={image.alt || `Slide ${i + 1}`}
-                width={1200}
-                height={675}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
+          {images.map((item, i) => {
+            const videoSrc = item._type === 'videoSlide' ? getVideoEmbedSrc(item.videoUrl) : null
+            return (
+              <div
+                key={i}
+                className="relative h-full flex-shrink-0"
+                style={{ width: `${100 / count}%` }}
+              >
+                {item._type === 'videoSlide' ? (
+                  videoSrc && i === current ? (
+                    <iframe
+                      src={videoSrc}
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full bg-black"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-black" />
+                  )
+                ) : (
+                  <Image
+                    src={urlFor(item).width(1200).height(675).url()}
+                    alt={item.alt || `Slide ${i + 1}`}
+                    width={1200}
+                    height={675}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+            )
+          })}
         </div>
 
       </div>
