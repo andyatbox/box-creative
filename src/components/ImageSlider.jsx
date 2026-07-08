@@ -11,6 +11,9 @@ export default function ImageSlider({ images }) {
   const deltaX = useRef(0)
   const [dragOffset, setDragOffset] = useState(0)
   const isDragging = useRef(false)
+  const lastDragAbs = useRef(0)
+  const iframeRefs = useRef({})
+  const [playingIndex, setPlayingIndex] = useState(null)
 
   if (!images?.length) return null
 
@@ -19,6 +22,21 @@ export default function ImageSlider({ images }) {
   const goTo = (index) => {
     setCurrent((index + count) % count)
     setDragOffset(0)
+    setPlayingIndex(null)
+  }
+
+  // The iframe sits under a transparent overlay so swipes reach the slider;
+  // taps control the player through its postMessage API instead.
+  const toggleVideo = (i, src) => {
+    const win = iframeRefs.current[i]?.contentWindow
+    if (!win) return
+    const method = playingIndex === i ? 'pause' : 'play'
+    if (src.includes('vimeo')) {
+      win.postMessage(JSON.stringify({ method }), '*')
+    } else {
+      win.postMessage(JSON.stringify({ context: 'player.js', version: '0.0.11', method }), '*')
+    }
+    setPlayingIndex(playingIndex === i ? null : i)
   }
 
   const prev = () => goTo(current - 1)
@@ -38,6 +56,7 @@ export default function ImageSlider({ images }) {
 
   const dragEnd = () => {
     if (!isDragging.current) return
+    lastDragAbs.current = Math.abs(deltaX.current)
     if (Math.abs(deltaX.current) > 50) {
       deltaX.current < 0 ? next() : prev()
     } else {
@@ -78,12 +97,32 @@ export default function ImageSlider({ images }) {
               >
                 {item._type === 'videoSlide' ? (
                   videoSrc && i === current ? (
-                    <iframe
-                      src={videoSrc}
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full bg-black"
-                    />
+                    <>
+                      <iframe
+                        ref={(el) => { iframeRefs.current[i] = el }}
+                        src={videoSrc}
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full bg-black pointer-events-none"
+                      />
+                      <div
+                        className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                        onClick={() => {
+                          if (lastDragAbs.current > 10) return
+                          toggleVideo(i, videoSrc)
+                        }}
+                        aria-label={playingIndex === i ? 'Pause video' : 'Play video'}
+                        role="button"
+                      >
+                        {playingIndex !== i && (
+                          <span className="w-16 h-16 rounded-full bg-black/60 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                              <polygon points="8 5 19 12 8 19" />
+                            </svg>
+                          </span>
+                        )}
+                      </div>
+                    </>
                   ) : (
                     <div className="w-full h-full bg-black" />
                   )
