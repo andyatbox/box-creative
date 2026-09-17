@@ -17,7 +17,8 @@ export const projectBySlugQuery = `
     thumbnail { ..., asset-> },
     gallery[] {
       ...,
-      _type == "image" => { ..., asset-> }
+      _type == "image" => { ..., asset-> },
+      _type == "imagesSlide" => { ..., images[] { ..., asset-> } }
     },
     body[] {
       ...,

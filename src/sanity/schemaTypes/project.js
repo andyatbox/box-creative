@@ -48,15 +48,42 @@ export default {
       type: 'array',
       of: [
         {
-          type: 'image',
-          options: { hotspot: true },
+          type: 'object',
+          name: 'imagesSlide',
+          title: 'Images',
           fields: [
             {
-              name: 'alt',
-              title: 'Alt Text',
-              type: 'string',
+              name: 'images',
+              title: 'Images',
+              description: 'Drop or select several images at once. Each one becomes its own slide.',
+              type: 'array',
+              of: [
+                {
+                  type: 'image',
+                  options: { hotspot: true },
+                  fields: [
+                    {
+                      name: 'alt',
+                      title: 'Alt Text',
+                      type: 'string',
+                    },
+                  ],
+                },
+              ],
+              options: { layout: 'grid' },
+              validation: (Rule) => Rule.min(1),
             },
           ],
+          preview: {
+            select: { images: 'images', media: 'images.0' },
+            prepare({ images, media }) {
+              const count = images?.length || 0
+              return {
+                title: count === 1 ? '1 image' : `${count} images`,
+                media,
+              }
+            },
+          },
         },
         {
           type: 'object',

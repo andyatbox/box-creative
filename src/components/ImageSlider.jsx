@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
 import { getVideoEmbedSrc } from '@/sanity/videoEmbed'
@@ -15,9 +15,18 @@ export default function ImageSlider({ images }) {
   const iframeRefs = useRef({})
   const [playingIndex, setPlayingIndex] = useState(null)
 
-  if (!images?.length) return null
+  // An "Images" entry holds a batch of uploads; each one becomes its own slide.
+  const slides = useMemo(
+    () =>
+      (images || []).flatMap((item) =>
+        item?._type === 'imagesSlide' ? item.images || [] : [item]
+      ),
+    [images]
+  )
 
-  const count = images.length
+  if (!slides.length) return null
+
+  const count = slides.length
 
   const goTo = (index) => {
     setCurrent((index + count) % count)
@@ -87,7 +96,7 @@ export default function ImageSlider({ images }) {
             transition: isDragging.current ? 'none' : 'transform 0.4s ease',
           }}
         >
-          {images.map((item, i) => {
+          {slides.map((item, i) => {
             const videoSrc = item._type === 'videoSlide' ? getVideoEmbedSrc(item.videoUrl) : null
             return (
               <div
@@ -155,7 +164,7 @@ export default function ImageSlider({ images }) {
           </button>
 
           <div className="flex gap-3">
-            {images.map((_, i) => (
+            {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goTo(i)}
