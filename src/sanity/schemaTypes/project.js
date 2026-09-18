@@ -75,12 +75,15 @@ export default {
             },
           ],
           preview: {
-            select: { images: 'images', media: 'images.0' },
-            prepare({ images, media }) {
+            // Only `images` is selected: adding a second path under the same
+            // head (`images.0`) makes Sanity resolve the array as an object,
+            // which loses both the length and the first item.
+            select: { images: 'images' },
+            prepare({ images }) {
               const count = images?.length || 0
               return {
                 title: count === 1 ? '1 image' : `${count} images`,
-                media,
+                media: images?.[0],
               }
             },
           },
