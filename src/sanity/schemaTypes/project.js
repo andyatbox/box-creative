@@ -21,6 +21,42 @@ export default {
       options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),
     },
+    // Cross-cutting craft, not the one bucket a project lives in: `category`
+    // stays single-choice because it decides which portfolio a project
+    // appears in, while a project can be any number of these at once. The
+    // values are what gets stored, so they are slugs rather than the labels
+    // — renaming a label later is then a change here alone.
+    {
+      name: 'tags',
+      title: 'Tags',
+      description: 'What the work involved. Tick every one that applies.',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Activation', value: 'activation' },
+          { title: 'App Development', value: 'app-development' },
+          { title: 'Artificial Intelligence', value: 'artificial-intelligence' },
+          { title: 'Augmented Reality', value: 'augmented-reality' },
+          { title: 'Brand Identity & Logo', value: 'brand-identity-logo' },
+          { title: 'CGI / 3D Design', value: 'cgi-3d-design' },
+          { title: 'Copywriting', value: 'copywriting' },
+          { title: 'Illustration', value: 'illustration' },
+          { title: 'Immersive Experience', value: 'immersive-experience' },
+          { title: 'Store Design', value: 'store-design' },
+          { title: 'Marketing Strategy', value: 'marketing-strategy' },
+          { title: 'Motion & Animation', value: 'motion-animation' },
+          { title: 'Print & Packaging', value: 'print-packaging' },
+          { title: 'Product Design', value: 'product-design' },
+          { title: 'Rich Media Ads', value: 'rich-media-ads' },
+          { title: 'Web Design & UX', value: 'web-design-ux' },
+        ],
+        // Checkboxes rather than a tag picker: the list is fixed and short
+        // enough to read at a glance, and seeing the unticked ones is half
+        // the point.
+        layout: 'grid',
+      },
+    },
     {
       name: 'category',
       title: 'Category',
